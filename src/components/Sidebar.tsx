@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@clerk/nextjs";
-import { Home, Truck, Bell, User } from "lucide-react";
+import { Home, Truck, Bell, User, PlusCircle } from "lucide-react";
 import Link from "next/link";
+
 
 const Sidebar = () => {
   return (
@@ -9,6 +10,11 @@ const Sidebar = () => {
     <Link href="/">
       <Button variant="ghost" size="icon" className="p-2">
         <Home className="h-6 w-6" />
+      </Button>
+    </Link>
+    <Link href="/add-product">
+      <Button variant="ghost" size="icon" className="p-2">
+        <PlusCircle className="h-6 w-6" />
       </Button>
     </Link>
     <Link href="/deliverables">

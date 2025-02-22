@@ -123,8 +123,8 @@ const ProductDetail = () => {
                     </div>
 
                     {/* Add to Cart Button */}
-                    <Button className="w-full py-6 text-lg bg-black hover:bg-gray-800 rounded-full md:text-xl">
-                        Add to Cart
+                    <Button className="w-full py-6 text-lg bg-black hover:bg-gray-800 rounded-full md:text-xl ">
+                        Get Item Now
                     </Button>
                 </div>
             </div>
