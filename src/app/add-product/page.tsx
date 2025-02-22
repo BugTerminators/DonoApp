@@ -17,13 +17,7 @@ const AddListing = () => {
     return (
         <div className="mx-auto bg-white min-h-screen pb-20 md:pb-0 md:max-w-7xl">
             {/* Status Bar - Mobile Only */}
-            <div className="p-4 flex justify-between items-center md:hidden">
-                <span className="text-sm">9:41</span>
-                <div className="flex items-center gap-1">
-                    <div className="w-4 h-4 bg-black rounded-full" />
-                    <div className="w-4 h-4 bg-black rounded-full" />
-                </div>
-            </div>
+            
 
             {/* Header */}
             <div className="px-4 py-2 md:py-6 md:px-8 flex items-center mb-6">
