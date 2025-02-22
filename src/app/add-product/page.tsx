@@ -4,15 +4,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft } from "lucide-react";
 import Link from 'next/link';
+import Image from 'next/image';
 
 const AddListing = () => {
     const categories = [
-        { id: 1, name: 'Food', image: '/api/placeholder/400/300' },
-        { id: 2, name: 'Clothes', image: '/api/placeholder/400/300' },
-        { id: 3, name: 'Books', image: '/api/placeholder/400/300' },
-        { id: 4, name: 'Utensils', image: '/api/placeholder/400/300' },
-        { id: 5, name: 'Electronics', image: '/api/placeholder/400/300' },
-        { id: 6, name: 'Stationary', image: '/api/placeholder/400/300' },
+        { id: 1, name: 'Food', image: '/images/food.png' },
+        { id: 2, name: 'Clothes', image: '/images/clothes.png' },
+        { id: 3, name: 'Books', image: '/images/books.png' },
+        { id: 4, name: 'Utensils', image: '/images/utensils.png' },
+        { id: 5, name: 'Electronics', image: '/images/electronics.png' },
+        { id: 6, name: 'Stationary', image: '/images/stationary.png' },
     ];
 
     return (
@@ -62,10 +63,12 @@ const AddListing = () => {
                                 key={category.id}
                                 className="relative overflow-hidden rounded-2xl aspect-[4/3] group transition-transform hover:scale-105"
                             >
-                                <img
+                                <Image
                                     src={category.image}
+                                    width={500}
+                                    height={500}
                                     alt={category.name}
-                                    className="w-full h-full object-cover"
+                                    className="object-cover"
                                 />
                                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                                     <span className="text-white text-xl md:text-2xl font-semibold">

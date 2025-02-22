@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 type OrderStatus = "COMPLETED" | "IN-PROCESS" | "CANCELED";
@@ -15,7 +16,7 @@ type Order = {
 const orders: Order[] = [
   {
     id: 1,
-    image: "https://via.placeholder.com/100",
+    image: "/images/tshirt-image",
     name: "Tshirt",
     category: "Cloths",
     orderTime: "2025-02-22 10:00 AM",
@@ -24,7 +25,7 @@ const orders: Order[] = [
   },
   {
     id: 2,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Orchid Pot",
     category: "Plants",
     orderTime: "2025-02-21 3:00 PM",
@@ -33,7 +34,7 @@ const orders: Order[] = [
   },
   {
     id: 3,
-    image: "https://via.placeholder.com/100",
+    image: "/images/tshirt-image",
     name: "Lily Basket",
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
@@ -63,8 +64,10 @@ const Deliverables = () => {
             key={order.id}
             className="flex items-center justify-between gap-4 p-4 border rounded-lg shadow"
           >
-            <img
+            <Image
               src={order.image}
+              width={500}
+              height={500}
               alt={order.name}
               className="w-24 h-24 object-cover rounded-lg"
             />
