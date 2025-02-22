@@ -7,14 +7,26 @@ import type { NewListing } from "./services/types";
 // Create a new listing
 export const createListing = async (c: Context) => {
   try {
+    console.log("createListing");
     const body = await c.req.json<NewListing>();
 
+    console.log("body", body);
     if (!body.title || !body.description || !body.created_by) {
       return c.json({ error: "Missing required fields" }, 400);
     }
 
-    await db.insert(listings).values(body);
+    const formattedBody = {
+      ...body,
+      created_at: body.created_at ? new Date(body.created_at) : undefined,
+      expire_at: body.expire_at ? new Date(body.expire_at) : null,
+      order_pickup_time: body.order_pickup_time
+        ? new Date(body.order_pickup_time)
+        : null,
+    };
+    console.log("inserting");
+    const a = await db.insert(listings).values(formattedBody).returning();
 
+    console.log("returning");
     return c.json({ message: "Listing created successfully" }, 201);
   } catch (error) {
     return c.json({ error: "Internal Server Error", details: error }, 500);
@@ -55,10 +67,22 @@ export const updateListing = async (c: Context) => {
   try {
     const id = c.req.param("id");
     const body = await c.req.json<Partial<NewListing>>();
+    if (!body.title && !body.description && !body.created_by) {
+      return c.json({ error: "No fields to update" }, 400);
+    }
+
+    const formattedBody = {
+      ...body,
+      created_at: body.created_at ? new Date(body.created_at) : undefined,
+      expire_at: body.expire_at ? new Date(body.expire_at) : null,
+      order_pickup_time: body.order_pickup_time
+        ? new Date(body.order_pickup_time)
+        : null,
+    };
 
     const updated = await db
       .update(listings)
-      .set(body)
+      .set(formattedBody)
       .where(eq(listings.id, parseInt(id)));
 
     if (!updated.rowCount) {

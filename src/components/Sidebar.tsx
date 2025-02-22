@@ -17,7 +17,7 @@ const Sidebar = () => {
         <PlusCircle className="h-6 w-6" />
       </Button>
     </Link>
-    <Link href="/deliveries">
+    <Link href="/deliverables">
       <Button variant="ghost" size="icon" className="p-2">
         <Truck className="h-6 w-6" />
       </Button>
