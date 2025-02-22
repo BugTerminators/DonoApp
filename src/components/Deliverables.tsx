@@ -1,4 +1,7 @@
 import React from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 type OrderStatus = "completed" | "in-process" | "canceled";
 
@@ -40,6 +43,51 @@ const orders: Order[] = [
     deliveryTime: "Canceled",
     status: "canceled",
   },
+  {
+    id: 4,
+    image: "https://via.placeholder.com/100",
+    name: "Lily Basket",
+    category: "Flowers",
+    orderTime: "2025-02-20 8:00 AM",
+    deliveryTime: "Canceled",
+    status: "canceled",
+  },
+  {
+    id: 5,
+    image: "https://via.placeholder.com/100",
+    name: "Lily Basket",
+    category: "Flowers",
+    orderTime: "2025-02-20 8:00 AM",
+    deliveryTime: "Canceled",
+    status: "canceled",
+  },
+  {
+    id: 6,
+    image: "https://via.placeholder.com/100",
+    name: "Lily Basket",
+    category: "Flowers",
+    orderTime: "2025-02-20 8:00 AM",
+    deliveryTime: "Canceled",
+    status: "canceled",
+  },
+  {
+    id: 7,
+    image: "https://via.placeholder.com/100",
+    name: "Lily Basket",
+    category: "Flowers",
+    orderTime: "2025-02-20 8:00 AM",
+    deliveryTime: "Canceled",
+    status: "canceled",
+  },
+  {
+    id: 8,
+    image: "https://via.placeholder.com/100",
+    name: "Lily Basket",
+    category: "Flowers",
+    orderTime: "2025-02-20 8:00 AM",
+    deliveryTime: "Canceled",
+    status: "canceled",
+  },
 ];
 
 const getStatusColor = (status: OrderStatus) => {
@@ -56,7 +104,8 @@ const getStatusColor = (status: OrderStatus) => {
 const Deliverables = () => {
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Deliverables</h1>
+      
+     
       <div className="grid gap-4">
         {orders.map((order) => (
           <div
@@ -68,19 +117,21 @@ const Deliverables = () => {
               alt={order.name}
               className="w-24 h-24 object-cover rounded-lg"
             />
-            <div className="flex-1">
-              <h2 className="text-lg font-semibold">{order.name}</h2>
-              <p className="text-gray-600">Category: {order.category}</p>
-              <p className="text-gray-600">Order Time: {order.orderTime}</p>
-              <p className="text-gray-600">Delivery Time: {order.deliveryTime}</p>
+             <div className="flex flex-col md:flex-row">
+                <div>
+                    <h2 className="text-lg font-semibold">{order.name}</h2>
+                    <p className="text-gray-600">Category: {order.category}</p>
+                    <p className="text-gray-600">Order Time: {order.orderTime}</p>
+                    <p className="text-gray-600">Delivery Time: {order.deliveryTime}</p>
+                </div>
+                <div
+                className={`py-2 rounded-full flex w-full justify-start md:justify-end ${getStatusColor(
+                    order.status
+                )}`}
+                >
+                {order.status}
+                </div>
             </div>
-            <span
-              className={`px-4 py-2 rounded-full ${getStatusColor(
-                order.status
-              )}`}
-            >
-              {order.status.replace("-", " ").toUpperCase()}
-            </span>
           </div>
         ))}
       </div>
