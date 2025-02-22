@@ -5,12 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Star, Heart, ArrowLeft} from "lucide-react";
 import { usePathname } from 'next/navigation';
 import Link from "next/link";
-import Image from 'next/image';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+  AlertDialogCancel,
+} from "@/components/ui/alert-dialog";
 
 const ProductDetail = () => {
     const productId = usePathname().slice(9);
-    console.log(productId);
-
     const [selectedImage, setSelectedImage] = useState(0);
     const [selectedSize, setSelectedSize] = useState('S');
 
@@ -25,20 +32,17 @@ const ProductDetail = () => {
 
     return (
         <div className="mx-auto bg-white min-h-screen pb-20 md:pb-0 md:max-w-7xl">
-            {/* Status Bar - Mobile Only */}
-           
-
             {/* Header */}
             <div className="px-4 py-2 flex justify-between items-center md:py-6 md:px-8">
                 <Link href="/">
-                <Button variant="ghost" size="icon">
-                    <ArrowLeft className="h-6 w-6" />
-                </Button>
+                    <Button variant="ghost" size="icon">
+                        <ArrowLeft className="h-6 w-6" />
+                    </Button>
+                </Link>
                 <h1 className="text-xl font-semibold md:text-2xl">Detail Product</h1>
                 <Button variant="ghost" size="icon">
                     <Heart className="h-6 w-6" />
                 </Button>
-                </Link>
             </div>
 
             <div className="md:grid md:grid-cols-2 md:gap-12 md:px-8 md:py-8">
@@ -64,8 +68,7 @@ const ProductDetail = () => {
                                 <button
                                     key={index}
                                     onClick={() => setSelectedImage(index)}
-                                    className={`flex-1 rounded-xl overflow-hidden ${selectedImage === index ? 'ring-2 ring-black' : ''
-                                        }`}
+                                    className={`flex-1 rounded-xl overflow-hidden ${selectedImage === index ? 'ring-2 ring-black' : ''}`}
                                 >
                                     <Image
                                         src={img}
@@ -82,7 +85,7 @@ const ProductDetail = () => {
 
                 {/* Right Column - Product Info */}
                 <div className="px-4 md:px-0 md:max-w-xl">
-                    <h2 className="text-3xl font-bold mb-1 md:text-4xl">Azalea Sweate:</h2>
+                    <h2 className="text-3xl font-bold mb-1 md:text-4xl">Azalea Sweater</h2>
                     <h2 className="text-xl font-bold mb-1">Product Id: {productId}</h2>
                     <p className="text-gray-400 mb-4 md:text-lg">Sweaters</p>
 
@@ -109,8 +112,7 @@ const ProductDetail = () => {
                                 <Button
                                     key={size}
                                     variant={selectedSize === size ? "default" : "outline"}
-                                    className={`rounded-full w-12 h-12 md:w-14 md:h-14 ${selectedSize === size ? 'bg-black text-white' : 'border-gray-200'
-                                        }`}
+                                    className={`rounded-full w-12 h-12 md:w-14 md:h-14 ${selectedSize === size ? 'bg-black text-white' : 'border-gray-200'}`}
                                     onClick={() => setSelectedSize(size)}
                                 >
                                     {size}
@@ -127,10 +129,25 @@ const ProductDetail = () => {
                         </p>
                     </div>
 
-                    {/* Add to Cart Button */}
-                    <Button className="w-full py-6 text-lg bg-black hover:bg-gray-800 rounded-full md:text-xl ">
-                        Get Item Now
-                    </Button>
+                    {/* Get Item Now Button with Alert Dialog */}
+                    <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                            <Button className="w-full py-6 text-lg bg-black hover:bg-gray-800 rounded-full md:text-xl">
+                                Get Item Now
+                            </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                            <AlertDialogHeader>
+                                <AlertDialogTitle>The seller has been notified</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                    You will receive the pickup location and time shortly once the seller confirms the order.
+                                </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                                <AlertDialogCancel>Done</AlertDialogCancel>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
                 </div>
             </div>
         </div>
