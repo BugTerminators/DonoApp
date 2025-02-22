@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const Home: React.FC = () => {
     return (
-        <div className="h-screen w- flex flex-col overflow-hidden">
+        <div className="h-screen flex flex-col overflow-hidden">
             {/* Sticky Header */}
             <div className="md:ml-20">
         <div className="max-w-7xl mx-auto">
