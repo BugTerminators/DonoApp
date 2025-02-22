@@ -6,6 +6,13 @@ import {
   updateListing,
 } from "@/backend/src/listing";
 import {
+  createOrder,
+  deleteOrder,
+  getOrderById,
+  getOrders,
+  updateOrderStatus,
+} from "@/backend/src/orders";
+import {
   createUser,
   deleteUser,
   getUserById,
@@ -86,6 +93,13 @@ app.get("/listings", getListings);
 app.get("/listings/:id", getListingById);
 app.put("/listings/:id", updateListing);
 app.delete("/listings/:id", deleteListing);
+
+// Order Routes
+app.post("/orders", createOrder);
+app.get("/orders", getOrders);
+app.get("/orders/:id", getOrderById);
+app.put("/orders/:id/status", updateOrderStatus);
+app.delete("/orders/:id", deleteOrder);
 
 export const GET = handle(app);
 export const POST = handle(app);

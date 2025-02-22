@@ -26,10 +26,10 @@ export const listings = pgTable("listings", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description").notNull(),
-  created_by: text("created_by")
+  created_by: integer("created_by")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  received_by: text("received_by").references(() => users.id, {
+  received_by: integer("received_by").references(() => users.id, {
     onDelete: "set null",
   }),
   category: integer("category").notNull(),
@@ -40,4 +40,17 @@ export const listings = pgTable("listings", {
   status: integer("status").notNull(),
   size: varchar("size", { length: 50 }),
   image_url: text("image_url"),
+});
+
+export const orders = pgTable("orders", {
+  id: serial("id").primaryKey(),
+  user_id: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  listing_id: integer("listing_id")
+    .notNull()
+    .references(() => listings.id, { onDelete: "cascade" }),
+  status: integer("status").notNull().default(0), // 0 = Pending, 1 = Approved, 2 = Rejected
+  requested_at: timestamp("requested_at").defaultNow().notNull(),
+  approved_at: timestamp("approved_at"),
 });

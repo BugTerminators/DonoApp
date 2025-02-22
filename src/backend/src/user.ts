@@ -9,7 +9,7 @@ export const createUser = async (c: Context) => {
   try {
     const body = await c.req.json<NewUser>();
 
-    // Validate required fields
+    // Validate required fields`
     if (!body.username || !body.email) {
       return c.json({ error: "Missing required fields" }, 400);
     }
