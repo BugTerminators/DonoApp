@@ -6,6 +6,7 @@ import Banner from '@/components/Banner';
 import BestSellerCard from '@/components/BestSellerCard';
 import { currentUser } from '@clerk/nextjs/server'
 
+
 async function EcommercePage() {
   const user = await currentUser()
 
