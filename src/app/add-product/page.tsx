@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft } from "lucide-react";
+import Link from 'next/link';
 
 const AddListing = () => {
     const categories = [
@@ -21,29 +22,31 @@ const AddListing = () => {
 
             {/* Header */}
             <div className="px-4 py-2 md:py-6 md:px-8 flex items-center mb-6">
+                <Link href="/">
                 <Button variant="ghost" size="icon" className="mr-4">
                     <ArrowLeft className="h-6 w-6" />
                 </Button>
-                <h1 className="text-2xl md:text-3xl font-semibold">Add Listing</h1>
+                </Link>
+                <h3 className="text-2xl md:text-3xl font-semibold">Add Listing</h3>
             </div>
 
             <div className="md:grid md:grid-cols-2 md:gap-12 md:px-8">
                 {/* Details Section */}
                 <div className="px-4 md:px-0 mb-8 md:mb-0">
-                    <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Details</h2>
+                    <h2 className="md:text-3xl font-bold mb-4 md:mb-6">Details</h2>
 
                     <div className="space-y-4 md:space-y-6">
                         <div className="bg-gray-50 rounded-2xl p-4 md:p-6">
                             <Input
                                 placeholder="Product Name"
-                                className="border-none bg-transparent text-lg md:text-xl placeholder:text-gray-500"
+                                className="border-none bg-transparent text-md md:text-xl placeholder:text-gray-500"
                             />
                         </div>
 
                         <div className="bg-gray-50 rounded-2xl p-4 md:p-6">
                             <Textarea
                                 placeholder="Product Description"
-                                className="border-none bg-transparent text-lg md:text-xl placeholder:text-gray-500 min-h-[120px] md:min-h-[200px] resize-none"
+                                className="border-none bg-transparent text-md md:text-xl placeholder:text-gray-500 min-h-[120px] md:min-h-[200px] resize-none"
                             />
                         </div>
                     </div>
@@ -51,7 +54,7 @@ const AddListing = () => {
 
                 {/* Category Section */}
                 <div className="px-4 md:px-0">
-                    <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Category</h2>
+                    <h2 className="md:text-3xl font-bold mb-4 md:mb-6">Category</h2>
 
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {categories.map((category) => (

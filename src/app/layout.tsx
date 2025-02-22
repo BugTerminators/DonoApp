@@ -8,6 +8,7 @@ import { ClerkProvider, SignInButton,
 import "./globals.css";
 import  Sidebar  from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
+import { Toaster } from 'sonner';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     
-    <ClerkProvider>
+    <ClerkProvider signUpForceRedirectUrl={'/onboarding'}>
       
     <html lang="en">
       <body
@@ -42,6 +43,7 @@ export default function RootLayout({
       <MobileNav/> 
       <div className="bg-gray-50">
         {children}
+        <Toaster />
         </div>
       </body>
     </html>

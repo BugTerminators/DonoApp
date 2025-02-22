@@ -1,4 +1,4 @@
-import { Bell, Home, Truck, User } from "lucide-react";
+import { Bell, Home, PlusCircle, Truck, User } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
@@ -9,6 +9,11 @@ const MobileNav = () => (
       <Link href="/">
       <Button variant="ghost" size="icon" className="p-2">
         <Home className="h-6 w-6" />
+      </Button>
+    </Link>
+    <Link href="/add-product">
+      <Button variant="ghost" size="icon" className="p-2">
+        <PlusCircle className="h-6 w-6" />
       </Button>
     </Link>
     <Link href="/deliveries">
