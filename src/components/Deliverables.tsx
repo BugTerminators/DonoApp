@@ -1,6 +1,6 @@
 import React from "react";
 
-type OrderStatus = "completed" | "in-process" | "canceled";
+type OrderStatus = "COMPLETED" | "IN-PROCESS" | "CANCELED";
 
 type Order = {
   id: number;
@@ -20,7 +20,7 @@ const orders: Order[] = [
     category: "Cloths",
     orderTime: "2025-02-22 10:00 AM",
     deliveryTime: "2025-02-23 5:00 PM",
-    status: "completed",
+    status: "COMPLETED",
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const orders: Order[] = [
     category: "Plants",
     orderTime: "2025-02-21 3:00 PM",
     deliveryTime: "2025-02-24 2:00 PM",
-    status: "in-process",
+    status: "IN-PROCESS",
   },
   {
     id: 3,
@@ -38,17 +38,17 @@ const orders: Order[] = [
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
     deliveryTime: "Canceled",
-    status: "canceled",
+    status: "CANCELED",
   },
 ];
 
 const getStatusColor = (status: OrderStatus) => {
   switch (status) {
-    case "completed":
+    case "COMPLETED":
       return "text-green-500";
-    case "in-process":
+    case "IN-PROCESS":
       return "text-yellow-500";
-    case "canceled":
+    case "CANCELED":
       return "text-red-500";
   }
 };
@@ -61,26 +61,29 @@ const Deliverables = () => {
         {orders.map((order) => (
           <div
             key={order.id}
-            className="flex items-center gap-4 p-4 border rounded-lg shadow"
+            className="flex items-center justify-between gap-4 p-4 border rounded-lg shadow"
           >
             <img
               src={order.image}
               alt={order.name}
               className="w-24 h-24 object-cover rounded-lg"
             />
-            <div className="flex-1">
-              <h2 className="text-lg font-semibold">{order.name}</h2>
-              <p className="text-gray-600">Category: {order.category}</p>
-              <p className="text-gray-600">Order Time: {order.orderTime}</p>
-              <p className="text-gray-600">Delivery Time: {order.deliveryTime}</p>
+            <div className="flex flex-col md:flex-row">
+                <div>
+                    <h2 className="text-lg font-semibold">{order.name}</h2>
+                    <p className="text-gray-600">Category: {order.category}</p>
+                    <p className="text-gray-600">Order Time: {order.orderTime}</p>
+                    <p className="text-gray-600">Delivery Time: {order.deliveryTime}</p>
+                </div>
+
+                <div
+                className={`py-2 rounded-full flex w-full justify-start md:justify-end ${getStatusColor(
+                    order.status
+                )}`}
+                >
+                {order.status}
+                </div>
             </div>
-            <span
-              className={`px-4 py-2 rounded-full ${getStatusColor(
-                order.status
-              )}`}
-            >
-              {order.status.replace("-", " ").toUpperCase()}
-            </span>
           </div>
         ))}
       </div>
