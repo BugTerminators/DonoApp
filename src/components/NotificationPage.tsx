@@ -25,13 +25,111 @@ const users: User[] = [
     avatarColor: "bg-[#f6d6a4]",
     initials: "SS",
   },
+  {
+    name: "Hiya Sarkar",
+    email: "sarkarhiya53@gmail.com",
+    date: "Feb 20",
+    avatarColor: "bg-[#f6e1a4]",
+    initials: "HS",
+  },
+  {
+    name: "Sree Gopal Saha",
+    email: "sreegopal0101@gmail.com",
+    date: "Feb 18",
+    avatarColor: "bg-[#f6d6a4]",
+    initials: "SS",
+  },
+  {
+    name: "Hiya Sarkar",
+    email: "sarkarhiya53@gmail.com",
+    date: "Feb 20",
+    avatarColor: "bg-[#f6e1a4]",
+    initials: "HS",
+  },
+  {
+    name: "Sree Gopal Saha",
+    email: "sreegopal0101@gmail.com",
+    date: "Feb 18",
+    avatarColor: "bg-[#f6d6a4]",
+    initials: "SS",
+  },
+  {
+    name: "Hiya Sarkar",
+    email: "sarkarhiya53@gmail.com",
+    date: "Feb 20",
+    avatarColor: "bg-[#f6e1a4]",
+    initials: "HS",
+  },
+  {
+    name: "Sree Gopal Saha",
+    email: "sreegopal0101@gmail.com",
+    date: "Feb 18",
+    avatarColor: "bg-[#f6d6a4]",
+    initials: "SS",
+  },
+  {
+    name: "Hiya Sarkar",
+    email: "sarkarhiya53@gmail.com",
+    date: "Feb 20",
+    avatarColor: "bg-[#f6e1a4]",
+    initials: "HS",
+  },
+  {
+    name: "Sree Gopal Saha",
+    email: "sreegopal0101@gmail.com",
+    date: "Feb 18",
+    avatarColor: "bg-[#f6d6a4]",
+    initials: "SS",
+  },
+  {
+    name: "Hiya Sarkar",
+    email: "sarkarhiya53@gmail.com",
+    date: "Feb 20",
+    avatarColor: "bg-[#f6e1a4]",
+    initials: "HS",
+  },
+  {
+    name: "Sree Gopal Saha",
+    email: "sreegopal0101@gmail.com",
+    date: "Feb 18",
+    avatarColor: "bg-[#f6d6a4]",
+    initials: "SS",
+  },
+  {
+    name: "Hiya Sarkar",
+    email: "sarkarhiya53@gmail.com",
+    date: "Feb 20",
+    avatarColor: "bg-[#f6e1a4]",
+    initials: "HS",
+  },
+  {
+    name: "Sree Gopal Saha",
+    email: "sreegopal0101@gmail.com",
+    date: "Feb 18",
+    avatarColor: "bg-[#f6d6a4]",
+    initials: "SS",
+  },
+  {
+    name: "Hiya Sarkar",
+    email: "sarkarhiya53@gmail.com",
+    date: "Feb 20",
+    avatarColor: "bg-[#f6e1a4]",
+    initials: "HS",
+  },
+  {
+    name: "Sree Gopal Saha",
+    email: "sreegopal0101@gmail.com",
+    date: "Feb 18",
+    avatarColor: "bg-[#f6d6a4]",
+    initials: "SS",
+  },
   // Add more users as needed
 ]
 
 export default function UserApprovalList() {
   return (
-    <div className="min-h-screen bg-[#fff] text-zinc-900">
-      <div className="mx-auto max-w-4xl space-y-1">
+    <div className="max-h-screen md:max-w-[calc(50vw)] bg-[#fff] text-zinc-900">
+      <div className="px-2 space-y-1">
         {users.map((user, index) => (
           <div
             key={index}
@@ -49,11 +147,11 @@ export default function UserApprovalList() {
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="sm" className="text-green-500 hover:text-green-700 hover:bg-green-500/10">
                 <Check className="h-4 w-4 mr-1.5" />
-                Approve
+                <span className="hidden md:block">Approve</span>
               </Button>
               <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-700 hover:bg-red-500/10">
                 <X className="h-4 w-4 mr-1.5" />
-                Decline
+                <span className="hidden md:block">Decline</span>
               </Button>
               <span className="ml-4 hidden text-sm text-zinc-500 sm:inline">{user.date}</span>
             </div>
