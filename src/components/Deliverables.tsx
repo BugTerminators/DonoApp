@@ -42,7 +42,7 @@ const orders: Order[] = [
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
     deliveryTime: "Canceled",
-    status: "canceled",
+    status: "CANCELED",
   },
   {
     id: 4,
@@ -51,7 +51,7 @@ const orders: Order[] = [
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
     deliveryTime: "Canceled",
-    status: "canceled",
+    status: "CANCELED",
   },
   {
     id: 5,
@@ -60,7 +60,7 @@ const orders: Order[] = [
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
     deliveryTime: "Canceled",
-    status: "canceled",
+    status: "CANCELED",
   },
   {
     id: 6,
@@ -69,7 +69,7 @@ const orders: Order[] = [
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
     deliveryTime: "Canceled",
-    status: "canceled",
+    status: "CANCELED",
   },
   {
     id: 7,
@@ -78,7 +78,7 @@ const orders: Order[] = [
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
     deliveryTime: "Canceled",
-    status: "canceled",
+    status: "CANCELED",
   },
   {
     id: 8,
@@ -87,7 +87,7 @@ const orders: Order[] = [
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
     deliveryTime: "Canceled",
-    status: "canceled",
+    status: "CANCELED",
   },
 ];
 
