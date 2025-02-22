@@ -36,15 +36,13 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      ><Sidebar/>
+      >
+        
+        <Sidebar/>
       <MobileNav/> 
-      <SignedOut>
-      <SignInButton />
-      <SignUpButton />
-    </SignedOut>
-    <SignedIn>
-    </SignedIn>
+      <div className="bg-gray-50">
         {children}
+        </div>
       </body>
     </html>
     </ClerkProvider>

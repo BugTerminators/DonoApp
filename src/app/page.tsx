@@ -44,7 +44,7 @@ async function EcommercePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Sidebar/>
+      
       <div className="md:ml-20">
         <div className="max-w-7xl mx-auto">
           {/*Status Bar - Mobile Only */}
