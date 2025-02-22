@@ -83,10 +83,10 @@
 import MobileNav from '@/components/MobileNav';
 import SearchBar from '@/components/SearchBar';
 import Banner from '@/components/Banner';
-import { currentUser, User } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs/server';
 import BestSellers from '@/components/BestSellers';
 
-const EcommercePage = async () => {
+const DonoAppPage = async () => {
   const user = await currentUser()
 
   return (
@@ -118,4 +118,4 @@ const EcommercePage = async () => {
   );
 };
 
-export default EcommercePage;
+export default DonoAppPage;
