@@ -117,19 +117,21 @@ const Deliverables = () => {
               alt={order.name}
               className="w-24 h-24 object-cover rounded-lg"
             />
-            <div className="flex-1">
-              <h2 className="text-lg font-semibold">{order.name}</h2>
-              <p className="text-gray-600">Category: {order.category}</p>
-              <p className="text-gray-600">Order Time: {order.orderTime}</p>
-              <p className="text-gray-600">Delivery Time: {order.deliveryTime}</p>
+             <div className="flex flex-col md:flex-row">
+                <div>
+                    <h2 className="text-lg font-semibold">{order.name}</h2>
+                    <p className="text-gray-600">Category: {order.category}</p>
+                    <p className="text-gray-600">Order Time: {order.orderTime}</p>
+                    <p className="text-gray-600">Delivery Time: {order.deliveryTime}</p>
+                </div>
+                <div
+                className={`py-2 rounded-full flex w-full justify-start md:justify-end ${getStatusColor(
+                    order.status
+                )}`}
+                >
+                {order.status}
+                </div>
             </div>
-            <span
-              className={`px-4 py-2 rounded-full ${getStatusColor(
-                order.status
-              )}`}
-            >
-              {order.status.replace("-", " ").toUpperCase()}
-            </span>
           </div>
         ))}
       </div>
