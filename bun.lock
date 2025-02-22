@@ -4,7 +4,10 @@
     "": {
       "name": "donoapp",
       "dependencies": {
+        "@clerk/clerk-sdk-node": "^5.1.6",
+        "@clerk/nextjs": "^6.12.0",
         "@neondatabase/serverless": "^0.10.4",
+        "@radix-ui/react-avatar": "^1.1.3",
         "@next/env": "^15.1.7",
         "@radix-ui/react-slot": "^1.1.2",
         "class-variance-authority": "^0.7.1",
@@ -13,11 +16,11 @@
         "drizzle-orm": "^0.39.3",
         "hono": "^4.7.2",
         "lucide-react": "^0.475.0",
-        "next": "15.1.7",
+        "next": "^15.1.7",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
         "tailwind-merge": "^3.0.1",
-        "tailwindcss-animate": "^1.0.7",
+        "tailwindcss-animate": "^1.0.7",,
       },
       "devDependencies": {
         "@eslint/eslintrc": "^3",
