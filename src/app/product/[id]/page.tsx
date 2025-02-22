@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Star, Heart, ArrowLeft } from "lucide-react";
+import { Star, Heart, ArrowLeft} from "lucide-react";
 import { usePathname } from 'next/navigation';
+import Link from "next/link";
 
 const ProductDetail = () => {
     const productId = usePathname().slice(9);
@@ -34,6 +35,7 @@ const ProductDetail = () => {
 
             {/* Header */}
             <div className="px-4 py-2 flex justify-between items-center md:py-6 md:px-8">
+                <Link href="/">
                 <Button variant="ghost" size="icon">
                     <ArrowLeft className="h-6 w-6" />
                 </Button>
@@ -41,6 +43,7 @@ const ProductDetail = () => {
                 <Button variant="ghost" size="icon">
                     <Heart className="h-6 w-6" />
                 </Button>
+                </Link>
             </div>
 
             <div className="md:grid md:grid-cols-2 md:gap-12 md:px-8 md:py-8">
