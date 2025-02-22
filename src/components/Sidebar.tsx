@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { UserButton } from "@clerk/nextjs";
 import { Home, Truck, Bell, User } from "lucide-react";
 import Link from "next/link";
 
@@ -25,6 +26,7 @@ const Sidebar = () => {
         <User className="h-6 w-6" />
       </Button>
     </Link>
+    <UserButton />
   </div>)
   };
 

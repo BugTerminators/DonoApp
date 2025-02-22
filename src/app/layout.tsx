@@ -6,6 +6,8 @@ import { ClerkProvider, SignInButton,
   SignedOut,
   UserButton, } from "@clerk/nextjs";
 import "./globals.css";
+import  Sidebar  from "@/components/Sidebar";
+import MobileNav from "@/components/MobileNav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,16 +30,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    
     <ClerkProvider>
+      
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      > <SignedOut>
+      ><Sidebar/>
+      <MobileNav/> 
+      <SignedOut>
       <SignInButton />
       <SignUpButton />
     </SignedOut>
     <SignedIn>
-      <UserButton />
     </SignedIn>
         {children}
       </body>
