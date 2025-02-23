@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-
+import { Button } from "./ui/button";
+import Image from "next/image";
 import { Card, CardContent } from "./ui/card";
 import {
   AlertDialog,
@@ -79,10 +80,12 @@ const BestSellerCard = ({ product }: { product: Product }) => {
         <CardContent className="p-4">
           <Link href={`/product/${product.id}`}>
             <div>
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-48 md:h-64 object-cover rounded-xl mb-2"
+              <Image
+                src={"/images/placeholder.png"}
+                width={200}
+                height={200}
+                alt={product.name || "Product"}
+                className="object-cover rounded-xl mb-2"
               />
               <h3 className="font-semibold">{product.title}</h3>
               <p className="text-gray-400">{getCategory(product.category)}</p>

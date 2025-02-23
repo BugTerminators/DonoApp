@@ -69,7 +69,7 @@ const ProductDetail = () => {
                                 src={product.image_url ? product.image_url : "/placeholder.jpg"}
                                 width={500}
                                 height={500}
-                                alt={product.title}
+                                alt={product.title || "Item"}
                                 className="w-full h-72 md:h-[600px] object-cover"
                             />
                         </div>
@@ -82,6 +82,9 @@ const ProductDetail = () => {
                     <p className="text-gray-400 mb-4 md:text-lg">{product.description}</p>
                     <p className="text-gray-400 mb-4 md:text-lg">Quantity: {product.quantity}</p>
                     <p className="text-gray-400 mb-4 md:text-lg">Size: {product.size}</p>
+                    <p className="text-gray-400 mb-4 md:text-lg">Category: {product.category}</p>
+                    <p className="text-gray-400 mb-4 md:text-lg">Expiry Date: {product.expire_at ? product.expire_at.toString() : "N/A"}</p>
+
 
                     {/* Get Item Now Button with Alert Dialog */}
                     <AlertDialog>

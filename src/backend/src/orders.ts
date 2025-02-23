@@ -98,6 +98,50 @@ export const getOrdersByUserEmail = async (c: Context) => {
   }
 };
 
+export const getDeliverablesByUserEmail = async (c: Context) => {
+  try {
+    const body = await c.req.json();
+    const email = body.email;
+    console.log("Email:", email);
+
+    // Fetch orders where the user_email matches
+    const userOrders = await db
+      .select()
+      .from(orders)
+      .where(eq(orders.user_email, email));
+
+    console.log("User Orders:", userOrders);
+
+    if (!userOrders.length) {
+      return c.json({ success: true, orders: [] });
+    }
+
+    const listingIds = userOrders.map((order) => order.listing_id);
+    console.log("Listing IDs:", listingIds);
+
+    // Fetch listing details for the retrieved orders
+    const listingsDetails = await db
+      .select()
+      .from(listings)
+      .where(inArray(listings.id, listingIds));
+
+    console.log("Listings Details:", listingsDetails);
+
+    // Merge orders with corresponding listing details
+    const mergedData = userOrders.map((order) => ({
+      ...order,
+      listing:
+        listingsDetails.find((listing) => listing.id === order.listing_id) ||
+        null,
+    }));
+
+    return c.json(mergedData);
+  } catch (error) {
+    console.error("Error fetching orders and listings:", error);
+    return c.json({ success: false, error }, 500);
+  }
+};
+
 // Update order status
 export const updateOrderStatus = async (c: Context) => {
   try {

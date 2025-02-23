@@ -1,6 +1,7 @@
 import {
   createListing,
   deleteListing,
+  getListingByEmail,
   getListingById,
   getListings,
   updateListing,
@@ -8,6 +9,7 @@ import {
 import {
   createOrder,
   deleteOrder,
+  getDeliverablesByUserEmail,
   getOrderById,
   getOrders,
   getOrdersByUserEmail,
@@ -92,6 +94,7 @@ app.delete("/users/:id", deleteUser);
 app.post("/listings", createListing);
 app.get("/listings", getListings);
 app.get("/listings/:id", getListingById);
+app.post("/listings/:id", getListingByEmail);
 app.put("/listings/:id", updateListing);
 app.delete("/listings/:id", deleteListing);
 
@@ -100,6 +103,7 @@ app.post("/orders", createOrder);
 app.get("/orders", getOrders);
 app.get("/orders/:id", getOrderById);
 app.post("/orders/email", getOrdersByUserEmail);
+app.post("/orders/deliverables/email", getDeliverablesByUserEmail);
 app.put("/orders/:id/status", updateOrderStatus);
 app.delete("/orders/:id", deleteOrder);
 

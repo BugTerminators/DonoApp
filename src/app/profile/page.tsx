@@ -21,11 +21,11 @@
 //   };
 //   const { userId } = getAuth(req);
 //   if (!userId) return res.status(401).json({ error: "Unauthorized" });
-  
+
 //   const clerk = await clerkClient();
 //   const userData = await clerk.users.getUser(userId);
 //   const user = await currentUser();
- 
+
 //   const products = [
 //     { id: 1, image: '/api/placeholder/300/300' },
 //     { id: 2, image: '/api/placeholder/300/300' },
@@ -123,18 +123,21 @@
 // export default ProfilePage;
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useUser } from "@clerk/nextjs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { 
-  Coins, 
-  Grid3X3, 
+import {
+  Coins,
+  Grid3X3,
   Mail,
   Phone
 } from "lucide-react";
 import Image from 'next/image';
+import Link from 'next/link';
+import { Listing } from '@/backend/src/services/types';
+import { fetchListingsByUser } from '@/services/apis/listings';
 
 const ProfilePage = () => {
   const { user } = useUser();
@@ -145,14 +148,17 @@ const ProfilePage = () => {
     sales: 156
   };
 
-  const products = [
-    { id: 1, image: '/api/placeholder/300/300' },
-    { id: 2, image: '/api/placeholder/300/300' },
-    { id: 3, image: '/api/placeholder/300/300' },
-    { id: 4, image: '/api/placeholder/300/300' },
-    { id: 5, image: '/api/placeholder/300/300' },
-    { id: 6, image: '/api/placeholder/300/300' },
-  ];
+  // const products = [
+  //   { id: 1, image: '/api/placeholder/300/300' },
+  //   { id: 2, image: '/api/placeholder/300/300' },
+  //   { id: 3, image: '/api/placeholder/300/300' },
+  //   { id: 4, image: '/api/placeholder/300/300' },
+  //   { id: 5, image: '/api/placeholder/300/300' },
+  //   { id: 6, image: '/api/placeholder/300/300' },
+  // ];
+
+  const [listings, setListings] = useState<Listing[]>([]);
+  const [loading, setLoading] = useState(true);
 
   // Get user initials for avatar fallback
   const getInitials = () => {
@@ -161,8 +167,20 @@ const ProfilePage = () => {
   };
 
   if (!user) {
-    return <div className="flex items-center justify-center h-screen">Loading...</div>;
+    return <div className="flex items-center justify-center h-screen">Loading User Details...</div>;
   }
+
+  useEffect(() => {
+    const fetchListings = async () => {
+      if (user.primaryEmailAddress) {
+        const newListings = await fetchListingsByUser(user.primaryEmailAddress.emailAddress);
+        setListings(newListings);
+      };
+      setLoading(false);
+    }
+
+    fetchListings();
+  }, [user]);
 
   return (
     <div className="max-w-2xl mx-auto bg-white min-h-screen">
@@ -170,7 +188,7 @@ const ProfilePage = () => {
       <div className="flex items-center justify-between p-4 border-b">
         <h1 className="text-xl font-semibold">{user.fullName}</h1>
         <Button variant="ghost" size="icon">
-          
+
         </Button>
       </div>
 
@@ -233,25 +251,33 @@ const ProfilePage = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-3 gap-1">
-          {products.map((product) => (
-            <Card 
-              key={product.id} 
-              className="relative aspect-square overflow-hidden group border-0 rounded-none"
-            >
-              <Image
-                src={product.image}
-                width={500}
-                height={500}
-                alt={`Product ${product.id}`}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
-                <div className="flex items-center gap-1 text-white">
-                </div>
-              </div>
-            </Card>
-          ))}
+        <div>
+          {loading ? (
+            <p className="text-center text-gray-500">Loading...</p>
+          ) : listings.length > 0 ? (
+            <div className="grid grid-cols-3 gap-1">
+              {listings.map((product) => (
+                <Link href={`/product/${product.id}`} key={product.id}>
+                  <Card
+                    className="relative aspect-square overflow-hidden group border-0 rounded-none"
+                  >
+                    <Image
+                      src={"/images/placeholder.png"}
+                      width={500}
+                      height={500}
+                      alt={`Product ${product.id}`}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                      <div className="flex items-center gap-1 text-white"></div>
+                    </div>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-gray-500">No listings available.</p>
+          )}
         </div>
       </div>
     </div>
