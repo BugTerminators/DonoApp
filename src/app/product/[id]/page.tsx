@@ -66,6 +66,8 @@ const ProductDetail = () => {
                         <div className="rounded-2xl overflow-hidden">
                             <Image
                                 src={product.image_url ? product.image_url : "/placeholder.jpg"}
+                                width={500}
+                                height={500}
                                 alt={product.title}
                                 className="w-full h-72 md:h-[600px] object-cover"
                             />

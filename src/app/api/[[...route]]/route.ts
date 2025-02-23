@@ -10,6 +10,7 @@ import {
   deleteOrder,
   getOrderById,
   getOrders,
+  getOrdersByUserEmail,
   updateOrderStatus,
 } from "@/backend/src/orders";
 import {
@@ -98,6 +99,7 @@ app.delete("/listings/:id", deleteListing);
 app.post("/orders", createOrder);
 app.get("/orders", getOrders);
 app.get("/orders/:id", getOrderById);
+app.post("/orders/email", getOrdersByUserEmail);
 app.put("/orders/:id/status", updateOrderStatus);
 app.delete("/orders/:id", deleteOrder);
 
