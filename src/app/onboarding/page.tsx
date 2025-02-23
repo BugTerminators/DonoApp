@@ -150,7 +150,7 @@ export default function OnboardingForm() {
         throw new Error('Failed to submit form');
       }
   
-      const result = await response.json();
+      
   
       // Handle file upload separately if it exists and user type is NGO
       if (data.userType === 'NGO' && data.supportingDocument instanceof File) {

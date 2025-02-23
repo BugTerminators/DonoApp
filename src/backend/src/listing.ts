@@ -24,7 +24,7 @@ export const createListing = async (c: Context) => {
         : null,
     };
     console.log("inserting");
-    const a = await db.insert(listings).values(formattedBody).returning();
+    await db.insert(listings).values(formattedBody).returning();
 
     console.log("returning");
     return c.json({ message: "Listing created successfully" }, 201);

@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import { Loader2 } from "lucide-react";
 import { SignIn, ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
 
