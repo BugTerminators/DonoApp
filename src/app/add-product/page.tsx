@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ArrowLeft, Upload } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -75,7 +74,6 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const AddListing = () => {
-  const router = useRouter();
   const [preview, setPreview] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);

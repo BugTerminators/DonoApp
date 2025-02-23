@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "./ui/button";
+
 import { Card, CardContent } from "./ui/card";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -14,7 +13,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { currentUser } from "@clerk/nextjs/server";
 import { useUser } from "@clerk/nextjs";
 import { createOrder } from "@/services/apis/orders";
 
