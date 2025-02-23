@@ -54,7 +54,7 @@ const formSchema = z.object({
 }).refine((data) => {
   // Validate size is required and valid for clothes
   if (data.category === 2) {
-    return SIZES.includes(data.size as any);
+    return SIZES.includes(data.size as typeof SIZES[number]);
   }
   return true;
 }, {
