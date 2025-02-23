@@ -37,7 +37,7 @@ const orders: Order[] = [
   },
   {
     id: 3,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Lily Basket",
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
@@ -46,7 +46,7 @@ const orders: Order[] = [
   },
   {
     id: 4,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Lily Basket",
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
@@ -55,7 +55,7 @@ const orders: Order[] = [
   },
   {
     id: 5,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Lily Basket",
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
@@ -64,7 +64,7 @@ const orders: Order[] = [
   },
   {
     id: 6,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Lily Basket",
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
@@ -73,7 +73,7 @@ const orders: Order[] = [
   },
   {
     id: 7,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Lily Basket",
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
@@ -82,7 +82,7 @@ const orders: Order[] = [
   },
   {
     id: 8,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Lily Basket",
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
