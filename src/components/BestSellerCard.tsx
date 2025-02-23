@@ -6,7 +6,6 @@ import Image from "next/image";
 import { Card, CardContent } from "./ui/card";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -15,7 +14,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { currentUser } from "@clerk/nextjs/server";
 import { useUser } from "@clerk/nextjs";
 import { createOrder } from "@/services/apis/orders";
 
@@ -36,12 +34,19 @@ const getCategory = (category: number) => {
   }
 }
 
-const BestSellerCard = ({ product }: any) => {
+interface Product {
+  id: number;
+  image: string;
+  name: string;
+  title: string;
+  category: number;
+}
 
+const BestSellerCard = ({ product }: { product: Product }) => {
   const { user } = useUser();
 
   const handleAlertClick = async (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevents event bubbling if needed
+    e.stopPropagation();
 
     if (user && user.primaryEmailAddress) {
       const userEmail = user.primaryEmailAddress.emailAddress;
@@ -51,7 +56,7 @@ const BestSellerCard = ({ product }: any) => {
         user_email: userEmail,
         listing_id: productId,
         status: 0,
-        requested_at: new Date().toISOString(), // Use current timestamp
+        requested_at: new Date().toISOString(),
         approved_at: null,
       };
 

@@ -1,7 +1,7 @@
-import Image from "next/image";
+
 import { Loader2 } from "lucide-react";
 import { SignUp, ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
-import OnboardingForm from "@/app/onboarding/page";
+
 
 export default function Page() {
   return (

@@ -19,7 +19,14 @@ const BestSellers = () => {
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Best Seller</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                 {listings.map((product) => (
-                    <BestSellerCard key={product.id} product={product} />
+                    <BestSellerCard 
+                        key={product.id} 
+                        product={{
+                            ...product,
+                            image: product.image_url || '',
+                            name: product.title
+                        }} 
+                    />
                 ))}
             </div>
         </div>

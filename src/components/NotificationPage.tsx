@@ -230,7 +230,7 @@ export default function UserApprovalList() {
     }
 
     loadData();
-  }, []);
+  }, [user]);
 
   return (
     <div className="max-h-screen md:max-w-[calc(50vw)] bg-white text-zinc-900">
