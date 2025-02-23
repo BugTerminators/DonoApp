@@ -81,7 +81,6 @@
 
 
 import MobileNav from '@/components/MobileNav';
-import SearchBar from '@/components/SearchBar';
 import Banner from '@/components/Banner';
 import { currentUser } from '@clerk/nextjs/server';
 import BestSellers from '@/components/BestSellers';
@@ -96,7 +95,7 @@ const DonoAppPage = async () => {
           <div className="px-4 md:px-8 pt-2 pb-4 md:pt-8">
             <h1 className="text-3xl md:text-4xl font-bold mb-2">Welcome Back, {user?.firstName}</h1>
             <p className="text-gray-400 mb-4">Find your favourite product here.</p>
-            <SearchBar />
+            
           </div>
 
           <Banner />

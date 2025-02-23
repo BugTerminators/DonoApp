@@ -1,10 +1,11 @@
 'use client';
-
+import { useUser } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, ControllerRenderProps } from "react-hook-form";
 import * as z from "zod";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -24,7 +25,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-// Define the form schema with Zod
+// Schema and type definitions remain the same
 const formSchema = z.object({
   userType: z.enum(["INDIVIDUAL", "NGO"], {
     required_error: "Please select a user type",
@@ -34,16 +35,22 @@ const formSchema = z.object({
     .min(10, "Phone number must be at least 10 digits")
     .max(15, "Phone number cannot exceed 15 digits")
     .regex(/^\+?[0-9]+$/, "Invalid phone number format"),
+  email: z.string()
+    .email("Invalid email address")
+    .min(1, "Email is required"),
   location: z.object({
     latitude: z.number(),
     longitude: z.number(),
-  }).optional(),
+  }, {
+    required_error: "Location access is required",
+  }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
 export default function OnboardingForm() {
-  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useUser();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [locationStatus, setLocationStatus] = useState<string>("");
 
   // Initialize the form
@@ -53,14 +60,14 @@ export default function OnboardingForm() {
       userType: undefined,
       supportingDocument: '',
       phoneNumber: '',
+      email: user?.primaryEmailAddress?.emailAddress || '',
     },
   });
 
-  // Handle file change
+  // Handle file change remains the same
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Check file type
       const validTypes = ['application/pdf', 'image/jpeg', 'image/png'];
       if (!validTypes.includes(file.type)) {
         toast.error("Invalid file type", {
@@ -69,7 +76,6 @@ export default function OnboardingForm() {
         e.target.value = '';
         return;
       }
-      // Check file size (5MB limit)
       if (file.size > 5 * 1024 * 1024) {
         toast.error("File too large", {
           description: "File size should not exceed 5MB"
@@ -81,7 +87,7 @@ export default function OnboardingForm() {
     }
   };
 
-  // Get location
+  // Get location function remains the same
   const getLocation = () => {
     setLocationStatus("Requesting location access...");
     if (!navigator.geolocation) {
@@ -108,35 +114,71 @@ export default function OnboardingForm() {
   };
 
   async function onSubmit(data: FormValues) {
-    setIsLoading(true);
-    
-    const promise = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        try {
-          // Add your form submission logic here
-          console.log(data);
-          resolve(data);
-        } catch (error) {
-          reject(error);
-        }
-      }, 2000);
-    });
+    if (!data.location) {
+      toast.error("Location access required", {
+        description: "Please grant location access before submitting"
+      });
+      return;
+    }
 
-    toast.promise(promise, {
-      loading: 'Submitting form...',
-      success: 'Form submitted successfully',
-      error: 'Something went wrong'
-    });
+    setIsSubmitting(true);
 
     try {
-      await promise;
+      let formData = new FormData();
+      if (data.supportingDocument instanceof File) {
+        formData.append('supportingDocument', data.supportingDocument);
+      }
+
+      const requestBody = {
+        userType: data.userType,
+        phoneNumber: data.phoneNumber,
+        email: data.email,
+        location: data.location,
+      };
+
+      const response = await fetch('/api/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
+      const result = await response.json();
+      
+      if (data.supportingDocument instanceof File) {
+        const fileUploadResponse = await fetch('/api/user/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!fileUploadResponse.ok) {
+          throw new Error('Failed to upload file');
+        }
+      }
+
+      toast.success('Form submitted successfully');
+      form.reset();
+      setLocationStatus("");
+
     } catch (error) {
-      console.error(error);
+      console.error('Form submission error:', error);
+      toast.error('Failed to submit form', {
+        description: error instanceof Error ? error.message : 'Unknown error occurred'
+      });
     } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
   }
-
+  useEffect(() => {
+    if (user?.primaryEmailAddress?.emailAddress) {
+      form.setValue('email', user.primaryEmailAddress.emailAddress);
+    }
+  }, [user, form]);
   return (
     <Card className="w-full max-w-md mx-auto mt-8">
       <CardHeader>
@@ -145,7 +187,6 @@ export default function OnboardingForm() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {/* User Type */}
             <FormField
               control={form.control}
               name="userType"
@@ -155,6 +196,7 @@ export default function OnboardingForm() {
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    disabled={isSubmitting}
                   >
                     <FormControl>
                       <SelectTrigger>
@@ -171,7 +213,6 @@ export default function OnboardingForm() {
               )}
             />
 
-            {/* Supporting Document (NGO only) */}
             {form.watch("userType") === "NGO" && (
               <FormItem>
                 <FormLabel>Supporting Documents</FormLabel>
@@ -181,13 +222,31 @@ export default function OnboardingForm() {
                     accept=".pdf,.jpg,.jpeg,.png"
                     onChange={handleFileChange}
                     className="cursor-pointer"
+                    disabled={isSubmitting}
                   />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
 
-            {/* Phone Number */}
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="email" 
+                      {...field}
+                      disabled={isSubmitting}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name="phoneNumber"
@@ -195,27 +254,42 @@ export default function OnboardingForm() {
                 <FormItem>
                   <FormLabel>Phone Number</FormLabel>
                   <FormControl>
-                    <Input placeholder="+1234567890" {...field} />
+                    <Input 
+                      placeholder="+1234567890" 
+                      {...field} 
+                      disabled={isSubmitting}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            {/* Location Permission */}
             <div className="space-y-2">
               <Button
                 type="button"
                 variant="outline"
                 onClick={getLocation}
                 className="w-full"
+                disabled={isSubmitting}
               >
                 {locationStatus ? locationStatus : "Grant Location Access"}
               </Button>
             </div>
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Submitting..." : "Complete Profile"}
+            <Button 
+              type="submit" 
+              className="w-full" 
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                "Complete Profile"
+              )}
             </Button>
           </form>
         </Form>

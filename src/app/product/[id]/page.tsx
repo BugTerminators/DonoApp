@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Star, Heart, ArrowLeft } from "lucide-react";
 import { usePathname } from 'next/navigation';
 import Link from "next/link";
+import Image from "next/image";
+
 import {
     AlertDialog,
     AlertDialogContent,
@@ -16,7 +18,6 @@ import {
     AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
 import { Listing } from '@/backend/src/services/types';
-import Image from 'next/image';
 import { fetchProductById } from '@/services/apis/listings';
 
 const ProductDetail = () => {

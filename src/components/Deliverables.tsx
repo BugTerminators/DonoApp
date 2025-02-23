@@ -1,9 +1,10 @@
+import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
-type OrderStatus = "completed" | "in-process" | "canceled";
+type OrderStatus = "COMPLETED" | "IN-PROCESS" | "CANCELED";
 
 type Order = {
   id: number;
@@ -18,85 +19,85 @@ type Order = {
 const orders: Order[] = [
   {
     id: 1,
-    image: "https://via.placeholder.com/100",
+    image: "/images/tshirt-image",
     name: "Tshirt",
     category: "Cloths",
     orderTime: "2025-02-22 10:00 AM",
     deliveryTime: "2025-02-23 5:00 PM",
-    status: "completed",
+    status: "COMPLETED",
   },
   {
     id: 2,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Orchid Pot",
     category: "Plants",
     orderTime: "2025-02-21 3:00 PM",
     deliveryTime: "2025-02-24 2:00 PM",
-    status: "in-process",
+    status: "IN-PROCESS",
   },
   {
     id: 3,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Lily Basket",
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
     deliveryTime: "Canceled",
-    status: "canceled",
+    status: "CANCELED",
   },
   {
     id: 4,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Lily Basket",
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
     deliveryTime: "Canceled",
-    status: "canceled",
+    status: "CANCELED",
   },
   {
     id: 5,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Lily Basket",
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
     deliveryTime: "Canceled",
-    status: "canceled",
+    status: "CANCELED",
   },
   {
     id: 6,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Lily Basket",
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
     deliveryTime: "Canceled",
-    status: "canceled",
+    status: "CANCELED",
   },
   {
     id: 7,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Lily Basket",
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
     deliveryTime: "Canceled",
-    status: "canceled",
+    status: "CANCELED",
   },
   {
     id: 8,
-    image: "https://via.placeholder.com/100",
+    image: "/images/orchidpot-image",
     name: "Lily Basket",
     category: "Flowers",
     orderTime: "2025-02-20 8:00 AM",
     deliveryTime: "Canceled",
-    status: "canceled",
+    status: "CANCELED",
   },
 ];
 
 const getStatusColor = (status: OrderStatus) => {
   switch (status) {
-    case "completed":
+    case "COMPLETED":
       return "text-green-500";
-    case "in-process":
+    case "IN-PROCESS":
       return "text-yellow-500";
-    case "canceled":
+    case "CANCELED":
       return "text-red-500";
   }
 };
@@ -110,10 +111,12 @@ const Deliverables = () => {
         {orders.map((order) => (
           <div
             key={order.id}
-            className="flex items-center gap-4 p-4 border rounded-lg shadow"
+            className="flex items-center justify-between gap-4 p-4 border rounded-lg shadow"
           >
-            <img
+            <Image
               src={order.image}
+              width={500}
+              height={500}
               alt={order.name}
               className="w-24 h-24 object-cover rounded-lg"
             />

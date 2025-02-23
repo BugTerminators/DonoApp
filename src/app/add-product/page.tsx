@@ -57,16 +57,16 @@ const AddListing = () => {
   });
 
   const categories = [
-    { id: "food", name: "Food", image: "/images/food.jpg" },
-    { id: "clothes", name: "Clothes", image: "/images/clothes.jpg" },
-    { id: "books", name: "Books", image: "/images/books.jpg" },
-    { id: "utensils", name: "Utensils", image: "/images/utensils.jpg" },
+    { id: "food", name: "Food", image: "/images/food.png" },
+    { id: "clothes", name: "Clothes", image: "/images/clothes.png" },
+    { id: "books", name: "Books", image: "/images/books.png" },
+    { id: "utensils", name: "Utensils", image: "/images/utensils.png" },
     {
       id: "electronics",
       name: "Electronics",
-      image: "/images/electronics.jpg",
+      image: "/images/electronics.png",
     },
-    { id: "stationary", name: "Stationary", image: "/images/stationary.jpg" },
+    { id: "stationary", name: "Stationary", image: "/images/stationary.png" },
   ];
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
