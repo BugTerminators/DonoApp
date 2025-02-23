@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Star, Heart, ArrowLeft} from "lucide-react";
 import { usePathname } from 'next/navigation';
 import Link from "next/link";
+import Image from "next/image";
+
 import {
   AlertDialog,
   AlertDialogContent,
@@ -51,8 +53,10 @@ const ProductDetail = () => {
                     {/* Main Image */}
                     <div className="px-4 mb-4 md:px-0">
                         <div className="rounded-2xl overflow-hidden">
-                            <img
-                                src={images[selectedImage]}
+                            <Image
+                                src= {images[selectedImage]}
+                                width={500}
+                                height={500}
                                 alt="Product"
                                 className="w-full h-72 md:h-[600px] object-cover"
                             />
@@ -68,8 +72,10 @@ const ProductDetail = () => {
                                     onClick={() => setSelectedImage(index)}
                                     className={`flex-1 rounded-xl overflow-hidden ${selectedImage === index ? 'ring-2 ring-black' : ''}`}
                                 >
-                                    <img
+                                    <Image
                                         src={img}
+                                        width={500}
+                                        height={500}
                                         alt={`Thumbnail ${index + 1}`}
                                         className="w-full h-20 md:h-24 object-cover"
                                     />

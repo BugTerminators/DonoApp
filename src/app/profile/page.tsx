@@ -134,6 +134,7 @@ import {
   Mail,
   Phone
 } from "lucide-react";
+import Image from 'next/image';
 
 const ProfilePage = () => {
   const { user } = useUser();
@@ -238,8 +239,10 @@ const ProfilePage = () => {
               key={product.id} 
               className="relative aspect-square overflow-hidden group border-0 rounded-none"
             >
-              <img
+              <Image
                 src={product.image}
+                width={500}
+                height={500}
                 alt={`Product ${product.id}`}
                 className="w-full h-full object-cover"
               />
