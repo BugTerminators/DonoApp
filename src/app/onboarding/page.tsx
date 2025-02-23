@@ -120,51 +120,58 @@ export default function OnboardingForm() {
       });
       return;
     }
-
+  
     setIsSubmitting(true);
-
+  
     try {
-      let formData = new FormData();
-      if (data.supportingDocument instanceof File) {
-        formData.append('supportingDocument', data.supportingDocument);
-      }
-
-      const requestBody = {
-        userType: data.userType,
-        phoneNumber: data.phoneNumber,
-        email: data.email,
-        location: data.location,
+      // Map userType to account_type integer
+      const accountTypeMap = {
+        'INDIVIDUAL': 1,
+        'NGO': 2
       };
-
-      const response = await fetch('/api/user', {
+  
+      const requestBody = {
+        email: data.email,
+        phone_no: data.phoneNumber,
+        account_type: accountTypeMap[data.userType],
+        latitude: data.location.latitude,
+        longitude: data.location.longitude
+      };
+  
+      const response = await fetch('/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(requestBody),
+        body: JSON.stringify(requestBody)
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to submit form');
       }
-
+  
       const result = await response.json();
-      
-      if (data.supportingDocument instanceof File) {
+  
+      // Handle file upload separately if it exists and user type is NGO
+      if (data.userType === 'NGO' && data.supportingDocument instanceof File) {
+        const formData = new FormData();
+        formData.append('supportingDocument', data.supportingDocument);
+        formData.append('email', data.email); // To associate the document with the user
+  
         const fileUploadResponse = await fetch('/api/user/upload', {
           method: 'POST',
           body: formData,
         });
-
+  
         if (!fileUploadResponse.ok) {
           throw new Error('Failed to upload file');
         }
       }
-
+  
       toast.success('Form submitted successfully');
       form.reset();
       setLocationStatus("");
-
+  
     } catch (error) {
       console.error('Form submission error:', error);
       toast.error('Failed to submit form', {
@@ -175,10 +182,10 @@ export default function OnboardingForm() {
     }
   }
   useEffect(() => {
-    if (user?.primaryEmailAddress?.emailAddress) {
-      form.setValue('email', user.primaryEmailAddress.emailAddress);
-    }
-  }, [user, form]);
+  if (user?.primaryEmailAddress?.emailAddress) {
+    form.setValue('email', user.primaryEmailAddress.emailAddress);
+  }
+}, [user, form]);
   return (
     <Card className="w-full max-w-md mx-auto mt-8">
       <CardHeader>
