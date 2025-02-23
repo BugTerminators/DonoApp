@@ -132,8 +132,7 @@ import {
   Coins, 
   Grid3X3, 
   Mail,
-  Phone,
-  Settings
+  Phone
 } from "lucide-react";
 
 const ProfilePage = () => {
@@ -146,12 +145,12 @@ const ProfilePage = () => {
   };
 
   const products = [
-    { id: 1, image: '/api/placeholder/300/300', likes: 123 },
-    { id: 2, image: '/api/placeholder/300/300', likes: 456 },
-    { id: 3, image: '/api/placeholder/300/300', likes: 789 },
-    { id: 4, image: '/api/placeholder/300/300', likes: 234 },
-    { id: 5, image: '/api/placeholder/300/300', likes: 567 },
-    { id: 6, image: '/api/placeholder/300/300', likes: 890 },
+    { id: 1, image: '/api/placeholder/300/300' },
+    { id: 2, image: '/api/placeholder/300/300' },
+    { id: 3, image: '/api/placeholder/300/300' },
+    { id: 4, image: '/api/placeholder/300/300' },
+    { id: 5, image: '/api/placeholder/300/300' },
+    { id: 6, image: '/api/placeholder/300/300' },
   ];
 
   // Get user initials for avatar fallback
@@ -170,7 +169,7 @@ const ProfilePage = () => {
       <div className="flex items-center justify-between p-4 border-b">
         <h1 className="text-xl font-semibold">{user.fullName}</h1>
         <Button variant="ghost" size="icon">
-          <Settings className="h-6 w-6" />
+          
         </Button>
       </div>
 
