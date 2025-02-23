@@ -11,7 +11,7 @@ import {
 // User Table
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
-  username: varchar("username", { length: 255 }).notNull().unique(),
+  username: varchar("username", { length: 255 }).notNull(),
   email: varchar("email", { length: 255 }).notNull().unique(),
   password: text("password"),
   phone_no: varchar("phone_no", { length: 20 }),
@@ -44,9 +44,9 @@ export const listings = pgTable("listings", {
 
 export const orders = pgTable("orders", {
   id: serial("id").primaryKey(),
-  user_id: integer("user_id")
+  user_email: text("user_email")
     .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
+    .references(() => users.email, { onDelete: "cascade" }),
   listing_id: integer("listing_id")
     .notNull()
     .references(() => listings.id, { onDelete: "cascade" }),

@@ -10,3 +10,13 @@ export const fetchListings = async () => {
     return [];
   }
 };
+
+export const fetchProductById = async (productId: string) => {
+  try {
+    const response = await fetch(`/api/listings/${productId}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching product details:", error);
+  }
+};
