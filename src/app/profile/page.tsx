@@ -246,8 +246,6 @@ const ProfilePage = () => {
               />
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
                 <div className="flex items-center gap-1 text-white">
-                  <span>♥</span>
-                  <span className="font-semibold">{product.likes}</span>
                 </div>
               </div>
             </Card>
