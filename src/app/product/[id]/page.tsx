@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Star, Heart, ArrowLeft} from "lucide-react";
 import { usePathname } from 'next/navigation';
 import Link from "next/link";
+import Image from "next/image";
+
 import {
   AlertDialog,
   AlertDialogContent,
@@ -52,7 +54,7 @@ const ProductDetail = () => {
                     <div className="px-4 mb-4 md:px-0">
                         <div className="rounded-2xl overflow-hidden">
                             <Image
-                                src={images[selectedImage]}
+                                src= {images[selectedImage]}
                                 width={500}
                                 height={500}
                                 alt="Product"
